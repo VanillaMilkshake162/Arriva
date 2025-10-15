@@ -1,0 +1,31 @@
+const modal = document.getElementById('purchaseModal');
+const modalMessage = document.getElementById('modalMessage');
+const continueBtn = document.getElementById('continueBtn');
+const productCards = document.querySelectorAll('.product-card');
+const loadingSection = document.getElementById('loadingSection');
+const purchaseSection = document.getElementById('purchaseSection');
+
+productCards.forEach(card => {
+  card.addEventListener('click', () => {
+    const productName = card.getAttribute('data-product');
+    modal.classList.add('active');
+    loadingSection.style.display = 'block';
+    purchaseSection.style.display = 'none';
+
+    setTimeout(() => {
+      loadingSection.style.display = 'none';
+      purchaseSection.style.display = 'block';
+      modalMessage.textContent = `Your purchase of ${productName} has been successfully processed and recorded by Arriva Corporation. A detailed confirmation message has been sent to your DMs for your reference.`;
+    }, 1800);
+  });
+});
+
+continueBtn.addEventListener('click', () => {
+  modal.classList.remove('active');
+});
+
+modal.addEventListener('click', (e) => {
+  if (e.target === modal) {
+    modal.classList.remove('active');
+  }
+});
